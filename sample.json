@@ -1,0 +1,183 @@
+{
+    "meta": {
+        "company": "NovaEdge Manufacturing Pvt Ltd",
+        "currency": "INR",
+        "generatedOn": "2026-01-30"
+    },
+    "bankStatements": [
+        {
+            "date": "2026-01-29",
+            "amount": 50000,
+            "reference": "TXN9001",
+            "narration": "Payment to ABC Supplies",
+            "linkedInvoice": "INV-7845"
+        },
+        {
+            "date": "2026-01-29",
+            "amount": 120000,
+            "reference": "TXN9002",
+            "narration": "Payment to XYZ Logistics",
+            "linkedInvoice": null
+        },
+        {
+            "date": "2026-01-28",
+            "amount": 250000,
+            "reference": "TXN9003",
+            "narration": "Payment to Delta Electronics",
+            "linkedInvoice": "INV-7822"
+        }
+    ],
+    "invoices": [
+        {
+            "invoiceNo": "INV-7845",
+            "vendor": "ABC Supplies",
+            "invoiceDate": "2026-01-15",
+            "amount": 50000,
+            "gstAmount": 9000,
+            "totalAmount": 59000,
+            "status": "Unpaid",
+            "paymentDate": "2026-01-22",
+            "month": "January",
+            "gstValid": true
+        },
+        {
+            "invoiceNo": "INV-7810",
+            "vendor": "XYZ Logistics",
+            "invoiceDate": "2026-01-18",
+            "amount": 42000,
+            "gstAmount": 7560,
+            "totalAmount": 49560,
+            "status": "Pending Approval",
+            "daysPending": 5,
+            "month": "January",
+            "gstValid": true
+        },
+        {
+            "invoiceNo": "INV-7822",
+            "vendor": "Delta Electronics",
+            "invoiceDate": "2026-01-10",
+            "amount": 250000,
+            "gstAmount": 45000,
+            "totalAmount": 295000,
+            "status": "Paid",
+            "paymentDate": "2026-01-28",
+            "month": "January",
+            "gstValid": true
+        },
+        {
+            "invoiceNo": "INV-7830",
+            "vendor": "ABC Supplies",
+            "invoiceDate": "2026-01-20",
+            "amount": 50000,
+            "gstAmount": 9000,
+            "totalAmount": 59000,
+            "status": "Pending Approval",
+            "daysPending": 7,
+            "month": "January",
+            "gstValid": false
+        },
+        {
+            "invoiceNo": "INV-7831",
+            "vendor": "ABC Supplies",
+            "invoiceDate": "2026-01-20",
+            "amount": 50000,
+            "gstAmount": 9000,
+            "totalAmount": 59000,
+            "status": "Pending Approval",
+            "daysPending": 7,
+            "month": "January",
+            "gstValid": false,
+            "duplicateOf": "INV-7830"
+        }
+    ],
+    "approvals": [
+        {
+            "invoiceNo": "INV-7810",
+            "approver": "Finance Manager",
+            "pendingDays": 5,
+            "approvalLimit": 100000
+        },
+        {
+            "invoiceNo": "INV-7822",
+            "approver": "Director Finance",
+            "pendingDays": 0,
+            "approvalLimit": 500000
+        },
+        {
+            "invoiceNo": "INV-7830",
+            "approver": "Senior Manager",
+            "pendingDays": 7,
+            "approvalLimit": 200000
+        }
+    ],
+    "emails": [
+        {
+            "emailId": "MAIL1001",
+            "invoiceNo": "INV-7810",
+            "receivedDate": "2026-01-24",
+            "subject": "Approval pending for INV-7810",
+            "status": "Pending"
+        },
+        {
+            "emailId": "MAIL1002",
+            "invoiceNo": "INV-7830",
+            "receivedDate": "2026-01-23",
+            "subject": "Approval required for INV-7830",
+            "status": "Pending"
+        }
+    ],
+    "vendorAnalytics": [
+        {
+            "vendor": "ABC Supplies",
+            "invoicesLastQuarter": 15,
+            "discrepancies": 5,
+            "duplicateInvoices": 2,
+            "riskRating": "High"
+        },
+        {
+            "vendor": "XYZ Logistics",
+            "invoicesLastQuarter": 10,
+            "discrepancies": 1,
+            "duplicateInvoices": 0,
+            "riskRating": "Low"
+        }
+    ],
+    "exceptionsToday": [
+        {
+            "type": "PaymentMismatch",
+            "invoiceNo": "INV-7845",
+            "invoiceTotal": 59000,
+            "bankPaid": 50000,
+            "difference": 9000
+        }
+    ],
+    "gstCompliance": [
+        {
+            "invoiceNo": "INV-7830",
+            "issue": "Invalid GST Number",
+            "risk": "High"
+        },
+        {
+            "invoiceNo": "INV-7831",
+            "issue": "Duplicate GST Invoice",
+            "risk": "Medium"
+        }
+    ],
+    "misReport": {
+        "month": "April",
+        "year": 2026,
+        "metrics": {
+            "received": 48,
+            "approved": 36,
+            "paid": 30,
+            "pending": 12
+        }
+    },
+    "cashForecast": {
+        "openingBalance": 1500000,
+        "expectedReceivables": 900000,
+        "expectedPayables": 1100000,
+        "projectedClosingBalance": 1300000,
+        "forecastPeriodDays": 30
+    }
+}
