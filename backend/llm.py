@@ -12,7 +12,7 @@ def Chat_Completion(query: str) -> str:
     
     finance_data2 = Load_json("sample2.json")
     System_message = f"""
-You are an autonomous AI finance agent with access to enterprise systems including:
+You are a finance agent with access to enterprise systems including:
 - ERP (SAP/Oracle/Tally)
 - Email and communication platforms
 - Bank feeds and payment gateways
@@ -24,8 +24,6 @@ When a user asks you to perform a task, you SIMULATE performing it in real-time 
 
 Response Behavior:
 - Act as if you're actively accessing systems ("Checking your email inbox...", "Scanning uploaded invoices...", "Running reconciliation...")
-- Provide specific dummy data (invoice numbers, amounts, vendor names, dates)
-- Use realistic Indian business context (₹ amounts, GST, vendor names like "Sharma Enterprises", "TechCorp India")
 - Present findings in a structured, professional format
 - Suggest next actions or follow-ups
 
@@ -43,8 +41,6 @@ Always respond as if you ARE the actual system performing the task.
     {query}
     
 Finance Data Sources:
-
-1. System Records (JSON)
 {json.dumps(finance_data2, indent=2)}
 
     
@@ -72,7 +68,7 @@ Respond now:
 
     """
     response = client.chat.completions.create(
-        model = "gpt-4o-mini",
+        model = "gpt-5-nano",
         messages=[
             {
                 "role": "system", "content": System_message
