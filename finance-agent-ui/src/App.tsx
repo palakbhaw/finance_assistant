@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import ChatBubble from "./components/ChatBubble"
 import type { Message } from "./types"
 import "./App.css"

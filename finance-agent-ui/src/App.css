@@ -23,6 +23,7 @@ body {
   color: #fff;
   padding: 20px;
 }
+
 .logo {
   font-size: 20px;
   font-weight: 700;
@@ -107,6 +108,7 @@ body {
 .chat-input button:disabled {
   opacity: 0.6;
 }
+
 /* Header actions */
 .chat-header {
   display: flex;
@@ -120,7 +122,7 @@ body {
 }
 
 .actions button {
-  background: #315170;
+  background: #88a0b9;
   border: 1px solid #e5e7eb;
   padding: 6px 10px;
   border-radius: 6px;
