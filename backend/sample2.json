@@ -134,6 +134,13 @@
     "TotalDueAfterTDS": 2300400,
     "TotalAmountReceived": 1298400,
     "TotalBalanceDue": 1002000
-  }
+  },
+  "notes_and_forecasts": [
+    "expecting the new PO of Rs. 1 cr for next 6 months.",
+    "Avg Salary Hike is 10% annually.",
+    "Avg hike in expenses is 2% annually.",
+    "As of now, Cash balance is 30,000",
+    "As of now, Bank balance is 50,00,000"
+  ]
 
 }
