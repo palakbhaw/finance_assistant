@@ -98,6 +98,17 @@ body {
   font-size: 14px;
 }
 
+.input-with-buttons {
+  flex: 1;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.input-with-buttons input {
+  flex: 1;
+}
+
 .chat-input button {
   background: #2563eb;
   color: #fff;
