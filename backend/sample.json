@@ -1,0 +1,16 @@
+{
+    "invoices": [
+        {"id": "INV-7823", "vendor": "Sharma Enterprises", "amount": 185000, "status": "pending_approval", "days_pending": 5, "approver": "Rajesh Kumar"},
+        {"id": "INV-7845", "vendor": "TechCorp India", "amount": 145000, "status": "paid", "payment_date": "2025-01-23"},
+        {"id": "INV-7891", "vendor": "Global Supplies Ltd", "amount": 320000, "status": "pending_approval", "days_pending": 4},
+        {"id": "INV-7905", "vendor": "Metro Logistics", "amount": 95500, "status": "discrepancy", "issue": "Duplicate entry detected"}
+    ],
+    "bank_transactions": [
+        {"date": "2025-01-29", "amount": 145000, "reference": "NEFT-89234", "status": "cleared"},
+        {"date": "2025-01-29", "amount": 320000, "reference": "RTGS-12847", "status": "pending"}
+    ],
+    "vendors": [
+        {"name": "Sharma Enterprises", "total_invoices": 47, "discrepancy_rate": "8%"},
+        {"name": "TechCorp India", "total_invoices": 89, "discrepancy_rate": "3%"}
+    ]
+}
