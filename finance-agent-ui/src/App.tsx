@@ -8,6 +8,10 @@ function App() {
   const [input, setInput] = useState("")
   const [isStreaming, setIsStreaming] = useState(false)
 
+  const chatBodyRef = useRef<HTMLDivElement>(null)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+
+
   /* 🔄 Finance-style typing messages */
   const statusMessages = [
     "Running reconciliation…",
@@ -15,6 +19,12 @@ function App() {
     "Matching bank transactions…"
   ]
   const [statusIndex, setStatusIndex] = useState(0)
+
+  useEffect(() => {
+    if (chatBodyRef.current) {
+      chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight
+    }
+  }, [messages, isStreaming]) // Also trigger when streaming starts/stops
 
   useEffect(() => {
     if (!isStreaming) return
@@ -104,7 +114,7 @@ function App() {
           </div>
         </header>
 
-        <section className="chat-body">
+        <section className="chat-body" ref={chatBodyRef}>
           {messages.map((m, i) => (
             <ChatBubble key={i} role={m.role} content={m.content} />
           ))}
@@ -114,6 +124,8 @@ function App() {
               ⏳ {statusMessages[statusIndex]}
             </div>
           )}
+
+          <div ref={messagesEndRef} />
         </section>
 
         <footer className="chat-input">

@@ -58,6 +58,8 @@ body {
   display: flex;
   flex-direction: column;
   background: #fff;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .chat-header {
@@ -122,8 +124,9 @@ body {
 }
 
 .actions button {
-  background: #88a0b9;
+  background: #3b4a5a;
   border: 1px solid #e5e7eb;
+  color: #f8fafc;
   padding: 6px 10px;
   border-radius: 6px;
   font-size: 12px;
