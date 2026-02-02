@@ -1,0 +1,73 @@
+# Virtual environment
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Byte-code files
+*.pyc
+__pycache__/
+
+# IDE-specific files (common ones)
+.idea/  # For PyCharm/IntelliJ
+.vscode/ # For VS Code (optional, as some config might be useful)
+
+# build artifacts
+dist/
+build/
+*.egg-info/
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# Specific to FastAPI/Python development
+# SQLite databases (if used, e.g., for testing)
+*.db
+test.db
+
+# Environment variables file (important for security)
+.env
+
+# OS-specific files
+.DS_Store # macOS
+Thumbs.db # Windows
+
+# Jupyter Notebook checkpoints (if used)
+.ipynb_checkpoints/
+.idea
+.ipynb_checkpoints
+.mypy_cache
+.vscode
+__pycache__
+.pytest_cache
+htmlcov
+dist
+site
+.coverage*
+coverage.xml
+.netlify
+test.db
+log.txt
+Pipfile.lock
+env3.*
+env
+docs_build
+site_build
+venv
+docs.zip
+archive.zip
+
+# vim temporary files
+*~
+.*.sw?
+.cache
+
+# macOS
+.DS_Store
+
+.codspeed
