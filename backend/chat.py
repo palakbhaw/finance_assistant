@@ -20,7 +20,7 @@ async def chat_stream(request: dict):
     async def event_generator():
         for step in steps:
           yield f"data: {step}\n\n"
-          time.sleep(0.6)  
+          time.sleep(1)  
 
     return StreamingResponse(
         event_generator(),

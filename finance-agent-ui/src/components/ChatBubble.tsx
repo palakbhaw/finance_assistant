@@ -11,7 +11,7 @@ export default function ChatBubble({ role, content }: Props) {
     <div
       style={{
         alignSelf: role === "user" ? "flex-end" : "flex-start",
-        background: role === "user" ? "#2563eb" : "#111827",
+        background: role === "user" ? "#3468da" : "#4078d3",
         color: "#fff",
         padding: "12px 16px",
         borderRadius: "14px",

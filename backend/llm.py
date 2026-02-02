@@ -26,7 +26,6 @@ Response Behavior:
 - Act as if you're actively accessing systems ("Checking your email inbox...", "Scanning uploaded invoices...", "Running reconciliation...")
 - Provide specific dummy data (invoice numbers, amounts, vendor names, dates)
 - Use realistic Indian business context (₹ amounts, GST, vendor names like "Sharma Enterprises", "TechCorp India")
-- Show progress indicators in your responses
 - Present findings in a structured, professional format
 - Suggest next actions or follow-ups
 
@@ -51,10 +50,9 @@ Finance Data Sources:
     
     Task:
 1. Acknowledge the task with an action statement
-2. Simulate processing steps
-3. Use provided data wherever applicable
-4. Highlight mismatches, delays, or risks
-5. End with a recommended next action
+2. Use provided data wherever applicable
+3. Highlight mismatches, delays, or risks
+4. End with a recommended next action
 
 Example Response Style:
 "Checking email inbox and invoice approval...
@@ -70,7 +68,7 @@ All are awaiting approval from Finance Manager (Rajesh Kumar).
 
 Would you like me to send automated reminders to the approver?"
 
-Respond now in this style:
+Respond now:
 
     """
     response = client.chat.completions.create(

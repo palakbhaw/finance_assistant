@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ChatBubble from "./components/ChatBubble"
 import type { Message } from "./types"
 import "./App.css"
@@ -7,6 +7,22 @@ function App() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState("")
   const [isStreaming, setIsStreaming] = useState(false)
+
+  /* 🔄 Finance-style typing messages */
+  const statusMessages = [
+    "Running reconciliation…",
+    "Checking invoice status…",
+    "Matching bank transactions…"
+  ]
+  const [statusIndex, setStatusIndex] = useState(0)
+
+  useEffect(() => {
+    if (!isStreaming) return
+    const id = setInterval(() => {
+      setStatusIndex(i => (i + 1) % statusMessages.length)
+    }, 1500)
+    return () => clearInterval(id)
+  }, [isStreaming])
 
   const sendMessage = async () => {
     if (!input.trim() || isStreaming) return
@@ -44,6 +60,11 @@ function App() {
     setIsStreaming(false)
   }
 
+  /* 🧪 Dummy action handlers */
+  const addSystemMessage = (text: string) => {
+    setMessages(p => [...p, { role: "agent", content: text }])
+  }
+
   return (
     <div className="app">
       {/* Sidebar */}
@@ -59,7 +80,28 @@ function App() {
       {/* Chat Area */}
       <main className="chat-container">
         <header className="chat-header">
-          💼 Finance AI Chat
+          <span>💼 Finance AI Chat</span>
+
+          {/* 📊 Action Buttons */}
+          <div className="actions">
+            <button onClick={() =>
+              addSystemMessage("📧 Payment reminder sent.")
+            }>
+              📊 Send Reminder
+            </button>
+
+            <button onClick={() =>
+              addSystemMessage("⚠️ Issue escalated to finance team.")
+            }>
+              ⚠️ Escalate
+            </button>
+
+            <button onClick={() =>
+              addSystemMessage("⬇️ Report downloaded successfully.")
+            }>
+              ⬇️ Download
+            </button>
+          </div>
         </header>
 
         <section className="chat-body">
@@ -68,7 +110,9 @@ function App() {
           ))}
 
           {isStreaming && (
-            <div className="typing">Finance AI is working</div>
+            <div className="typing">
+              ⏳ {statusMessages[statusIndex]}
+            </div>
           )}
         </section>
 

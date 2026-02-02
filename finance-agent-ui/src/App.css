@@ -8,20 +8,21 @@ body {
   background: #f8fafc;
 }
 
-/* Layout */
 .app {
   display: flex;
+  width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
 
 /* Sidebar */
 .sidebar {
   width: 240px;
+  min-width: 240px;
   background: #020617;
   color: #fff;
   padding: 20px;
 }
-
 .logo {
   font-size: 20px;
   font-weight: 700;
@@ -46,7 +47,7 @@ body {
 
 .sidebar button.active,
 .sidebar button:hover {
-  background: #1e293b;
+  background: #0a57d3;
   color: #fff;
 }
 
@@ -105,4 +106,35 @@ body {
 
 .chat-input button:disabled {
   opacity: 0.6;
+}
+/* Header actions */
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.actions button {
+  background: #315170;
+  border: 1px solid #e5e7eb;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.actions button:hover {
+  background: #e2e8f0;
+}
+
+/* Typing indicator */
+.typing {
+  font-size: 12px;
+  color: #475569;
+  font-style: italic;
 }
