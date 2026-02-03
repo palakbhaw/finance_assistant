@@ -77,87 +77,17 @@ body {
   gap: 12px;
 }
 
-.typing {
-  font-size: 12px;
-  color: #64748b;
-}
-
-/* Input */
+/* Input Container */
 .chat-input {
   padding: 16px;
   border-top: 1px solid #e5e7eb;
   display: flex;
   gap: 10px;
-  background: transparent !important;
+  background: #fff;
   border: none !important;
 }
 
-.chat-input input {
-  flex: 1;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
-  font-size: 14px;
-}
-
-.input-with-buttons {
-  flex: 1;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.input-with-buttons input {
-  flex: 1;
-}
-
-.chat-input button {
-  background: #2563eb;
-  color: #fff;
-  border: none;
-  padding: 0 20px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.chat-input button:disabled {
-  opacity: 0.6;
-}
-
-/* Header actions */
-.chat-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.actions {
-  display: flex;
-  gap: 8px;
-}
-
-.actions button {
-  background: #3b4a5a;
-  border: 1px solid #e5e7eb;
-  color: #f8fafc;
-  padding: 6px 10px;
-  border-radius: 6px;
-  font-size: 12px;
-  cursor: pointer;
-}
-
-.actions button:hover {
-  background: #e2e8f0;
-}
-
-/* Typing indicator */
-.typing {
-  font-size: 12px;
-  color: #475569;
-  font-style: italic;
-}
-
-/* New input box layout */
+/* Main Input Box - Perplexity Style */
 .input-box {
   width: 100%;
   border: 1px solid #e5e7eb;
@@ -166,98 +96,35 @@ body {
   background: #fff;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .input-box input {
   border: none;
   outline: none;
   font-size: 14px;
+  padding: 4px;
+  background: transparent;
+  width: 100%;
 }
 
-/* Action buttons row */
-.input-actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.action-btn {
-  font-size: 12px;
-  padding: 6px 10px;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
-  background: #f8fafc;
-  cursor: pointer;
-}
-
-.action-btn.warning {
-  background: #fff7ed;
-  border-color: #f59e0b;
-}
-
-/* Footer row */
+/* Input Footer - Contains actions grid and send section */
 .input-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 8px;
 }
 
-.input-actions,
-.icon-actions {
-  display: flex;
+/* Left Side: Action Buttons Grid (Perplexity Style) */
+.actions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
 }
 
-/* Single icon */
-.icon-action {
-  position: relative;
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 16px;
-  color: #374151;
-}
-
-.icon-action:hover {
-  background: #f3f4f6;
-}
-
-/* Hover label (Perplexity-style) */
-.icon-action::after {
-  content: attr(data-label);
-  position: absolute;
-  bottom: 45px;
-  background: #111827;
-  color: #fff;
-  font-size: 11px;
-  padding: 4px 8px;
-  border-radius: 6px;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(4px);
-  transition: all 0.15s ease;
-}
-
-/* Show label on hover */
-.icon-action:hover::after {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.primary-actions {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 8px;
-}
-
-.icon-btn {
+/* Action Button in Grid */
+.grid-action-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -269,15 +136,54 @@ body {
   cursor: pointer;
   color: #374151;
   position: relative;
-  transition: background 0.2s, color 0.2s;
-
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
-.icon-btn:hover {
+.grid-action-btn:hover {
   background: #f3f4f6;
 }
 
-.icon-btn::after {
+.grid-action-btn.selected {
+  background: #2563eb;
+  color: white;
+  border: 1px solid #2563eb;
+}
+
+/* Right Side: Send Section with Utility Buttons */
+.send-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Utility Buttons (beside Send button) */
+.utility-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.utility-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  color: #374151;
+  position: relative;
+  transition: background 0.2s;
+}
+
+.utility-btn:hover {
+  background: #f3f4f6;
+}
+
+/* Tooltip for all buttons */
+.grid-action-btn::after,
+.utility-btn::after {
   content: attr(data-label);
   position: absolute;
   bottom: 45px;
@@ -292,39 +198,16 @@ body {
   white-space: nowrap;
   transition: all 0.15s ease;
   pointer-events: none;
+  z-index: 10;
 }
 
-.icon-btn:hover::after {
+.grid-action-btn:hover::after,
+.utility-btn:hover::after {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
 
-.icon-btn.selected {
-  background: #2563eb;
-  color: white;
-  border: 1px solid #2563eb;
-}
-
-.bottom-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 8px;
-}
-
-.utilities {
-  display: flex;
-  gap: 10px;
-}
-
-/* Override send button inside footer */
-.input-footer button:last-child {
-  background: #2563eb;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 8px;
-}
-
+/* Send Button */
 .send-btn {
   background: #2563eb;
   color: white;
@@ -332,7 +215,29 @@ body {
   padding: 8px 16px;
   border-radius: 8px;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s;
+  min-width: 60px;
 }
+
+.send-btn:hover:not(:disabled) {
+  background: #1e40af;
+}
+
+.send-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Typing indicator */
+.typing {
+  font-size: 12px;
+  color: #64748b;
+  font-style: italic;
+  padding: 4px 0;
+}
+
 /* Chat bubbles */
 .bubble {
   max-width: 85%;
@@ -356,11 +261,6 @@ body {
   background: #f8fafc;
   border: 1px solid #e5e7eb;
   color: #0f172a;
-}
-
-/* RESULT */
-.agent-result {
-  margin-bottom: 10px;
 }
 
 /* INSIGHTS */
@@ -416,9 +316,22 @@ body {
   font-style: italic;
 }
 
-/* Typing indicator */
-.typing {
-  font-size: 12px;
-  color: #64748b;
-  font-style: italic;
+/* Force all buttons inside input-box to have solid backgrounds */
+.input-box button {
+  background-color: #f9fafb !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+/* Override for selected state */
+.input-box .grid-action-btn.selected {
+  background-color: #2563eb !important;
+  border-color: #2563eb !important;
+  color: white !important;
+}
+
+/* Override for send button */
+.input-box .send-btn {
+  background-color: #2563eb !important;
+  color: white !important;
+  border: none !important;
 }
