@@ -2,18 +2,15 @@ import { useEffect, useState, useRef } from "react"
 import ChatBubble from "./components/ChatBubble"
 import type { Message } from "./types"
 import "./App.css"
-import { Search, Paperclip, CalendarCheck, AlertOctagon, Download } from "lucide-react";
+import { Search, Paperclip, CalendarCheck, AlertOctagon, Download } from "lucide-react"
 
 function App() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState("")
   const [isStreaming, setIsStreaming] = useState(false)
+  const [selectedAction, setSelectedAction] = useState<string | null>(null)
 
   const chatBodyRef = useRef<HTMLDivElement>(null)
-  const messagesEndRef = useRef<HTMLDivElement>(null)
-  const [selectedAction, setSelectedAction] = useState<string | null>(null);
-
-
 
   /* 🔄 Finance-style typing messages */
   const statusMessages = [
@@ -23,12 +20,14 @@ function App() {
   ]
   const [statusIndex, setStatusIndex] = useState(0)
 
+  /* Auto-scroll */
   useEffect(() => {
     if (chatBodyRef.current) {
       chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight
     }
-  }, [messages, isStreaming]) // Also trigger when streaming starts/stops
+  }, [messages, isStreaming])
 
+  /* Typing animation */
   useEffect(() => {
     if (!isStreaming) return
     const id = setInterval(() => {
@@ -37,17 +36,20 @@ function App() {
     return () => clearInterval(id)
   }, [isStreaming])
 
-  const sendMessage = async () => {
-    if (!input.trim() || isStreaming) return
-    setIsStreaming(true)
+  /* 🔥 Core send logic */
+  const sendMessage = async (text?: string) => {
+    const finalText = text ?? input
+    if (!finalText.trim() || isStreaming) return
 
-    setMessages(prev => [...prev, { role: "user", content: input }])
+    setIsStreaming(true)
     setInput("")
+
+    setMessages(prev => [...prev, { role: "user", content: finalText }])
 
     const response = await fetch("http://127.0.0.1:8000/chat/stream", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: input })
+      body: JSON.stringify({ message: finalText })
     })
 
     const reader = response.body!.getReader()
@@ -66,16 +68,16 @@ function App() {
         if (!text) continue
 
         setMessages(prev => [...prev, { role: "agent", content: text }])
-        await new Promise(r => setTimeout(r, 300))
+        await new Promise(r => setTimeout(r, 250))
       }
     }
 
     setIsStreaming(false)
   }
 
-  /* 🧪 Dummy action handlers */
-  const addSystemMessage = (text: string) => {
-    setMessages(p => [...p, { role: "agent", content: text }])
+  /* 🔁 Called when user clicks an ACTION chip */
+  const handleAgentAction = (actionText: string) => {
+    sendMessage(actionText)
   }
 
   return (
@@ -94,12 +96,16 @@ function App() {
       <main className="chat-container">
         <header className="chat-header">
           <span>💼 Finance AI Chat</span>
-
         </header>
 
         <section className="chat-body" ref={chatBodyRef}>
           {messages.map((m, i) => (
-            <ChatBubble key={i} role={m.role} content={m.content} />
+            <ChatBubble
+              key={i}
+              role={m.role}
+              content={m.content}
+              onActionClick={handleAgentAction}
+            />
           ))}
 
           {isStreaming && (
@@ -107,9 +113,9 @@ function App() {
               ⏳ {statusMessages[statusIndex]}
             </div>
           )}
-
-          <div ref={messagesEndRef} />
         </section>
+
+        {/* Input */}
         <div className="chat-input">
           <div className="input-box">
             <input
@@ -117,61 +123,62 @@ function App() {
               onChange={e => setInput(e.target.value)}
               placeholder="Type your finance question..."
               disabled={isStreaming}
+              onKeyDown={e => e.key === "Enter" && sendMessage()}
             />
 
-            {/* Action buttons inside input box */}
-            <div className="input-actions">
-
-              {/* Three primary action buttons grouped */}
-              <div className="primary-actions">
-                <div
-                  className={`icon-btn action-btn ${selectedAction === "reminder" ? "selected" : ""}`}
-                  onClick={() => setSelectedAction("reminder")}
-                  data-label="Send Reminder"
-                >
-                  <CalendarCheck size={20} />
-                </div>
-
-                <div
-                  className={`icon-btn action-btn ${selectedAction === "escalate" ? "selected" : ""}`}
-                  onClick={() => setSelectedAction("escalate")}
-                  data-label="Escalate"
-                >
-                  <AlertOctagon size={20} />
-                </div>
-
-                <div
-                  className={`icon-btn action-btn ${selectedAction === "download" ? "selected" : ""}`}
-                  onClick={() => setSelectedAction("download")}
-                  data-label="Download"
-                >
-                  <Download size={20} />
-                </div>
+            {/* Action buttons */}
+            <div className="primary-actions">
+              <div
+                className={`icon-btn ${selectedAction === "reminder" ? "selected" : ""}`}
+                onClick={() => setSelectedAction("reminder")}
+                data-label="Send Reminder"
+              >
+                <CalendarCheck size={18} />
               </div>
 
+<<<<<<< HEAD
               {/* Text input */}
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 disabled={isStreaming}
               />
+=======
+              <div
+                className={`icon-btn ${selectedAction === "escalate" ? "selected" : ""}`}
+                onClick={() => setSelectedAction("escalate")}
+                data-label="Escalate"
+              >
+                <AlertOctagon size={18} />
+              </div>
+>>>>>>> 054481b69ae5eb7291b7a4df99e92c7c4606fa3a
 
-              {/* Bottom icons + send */}
-              <div className="bottom-row">
-                <div className="utilities">
-                  <div className="icon-btn" data-label="Web Search">
-                    <Search size={20} />
-                  </div>
-                  <div className="icon-btn" data-label="Attach File">
-                    <Paperclip size={20} />
-                  </div>
-                </div>
-
-                <button className="send-btn" onClick={sendMessage}>
-                  Send
-                </button>
+              <div
+                className={`icon-btn ${selectedAction === "download" ? "selected" : ""}`}
+                onClick={() => setSelectedAction("download")}
+                data-label="Download"
+              >
+                <Download size={18} />
               </div>
             </div>
+<<<<<<< HEAD
+=======
+
+            <div className="bottom-row">
+              <div className="utilities">
+                <div className="icon-btn" data-label="Web Search">
+                  <Search size={18} />
+                </div>
+                <div className="icon-btn" data-label="Attach File">
+                  <Paperclip size={18} />
+                </div>
+              </div>
+
+              <button className="send-btn" onClick={() => sendMessage()}>
+                Send
+              </button>
+            </div>
+>>>>>>> 054481b69ae5eb7291b7a4df99e92c7c4606fa3a
           </div>
         </div>
       </main>
