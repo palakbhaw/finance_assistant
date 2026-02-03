@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react"
 import ChatBubble from "./components/ChatBubble"
 import type { Message } from "./types"
 import "./App.css"
+import { Search, Paperclip, CalendarCheck, AlertOctagon, Download } from "lucide-react";
 
 function App() {
   const [messages, setMessages] = useState<Message[]>([])
@@ -10,6 +11,8 @@ function App() {
 
   const chatBodyRef = useRef<HTMLDivElement>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const [selectedAction, setSelectedAction] = useState<string | null>(null);
+
 
 
   /* 🔄 Finance-style typing messages */
@@ -92,26 +95,6 @@ function App() {
         <header className="chat-header">
           <span>💼 Finance AI Chat</span>
 
-          {/* 📊 Action Buttons */}
-          <div className="actions">
-            <button onClick={() =>
-              addSystemMessage("📧 Payment reminder sent.")
-            }>
-              📊 Send Reminder
-            </button>
-
-            <button onClick={() =>
-              addSystemMessage("⚠️ Issue escalated to finance team.")
-            }>
-              ⚠️ Escalate
-            </button>
-
-            <button onClick={() =>
-              addSystemMessage("⬇️ Report downloaded successfully.")
-            }>
-              ⬇️ Download
-            </button>
-          </div>
         </header>
 
         <section className="chat-body" ref={chatBodyRef}>
@@ -127,18 +110,71 @@ function App() {
 
           <div ref={messagesEndRef} />
         </section>
+        <div className="chat-input">
+          <div className="input-box">
+            <input
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              placeholder="Type your finance question..."
+              disabled={isStreaming}
+            />
 
-        <footer className="chat-input">
-          <input
-            value={input}
-            onChange={e => setInput(e.target.value)}
-            placeholder="Type your finance question..."
-            onKeyDown={e => e.key === "Enter" && sendMessage()}
-          />
-          <button onClick={sendMessage} disabled={isStreaming}>
-            Send
-          </button>
-        </footer>
+            {/* Action buttons inside input box */}
+            <div className="input-actions">
+
+              {/* Three primary action buttons grouped */}
+              <div className="primary-actions">
+                <div
+                  className={`icon-btn action-btn ${selectedAction === "reminder" ? "selected" : ""}`}
+                  onClick={() => setSelectedAction("reminder")}
+                  data-label="Send Reminder"
+                >
+                  <CalendarCheck size={20} />
+                </div>
+
+                <div
+                  className={`icon-btn action-btn ${selectedAction === "escalate" ? "selected" : ""}`}
+                  onClick={() => setSelectedAction("escalate")}
+                  data-label="Escalate"
+                >
+                  <AlertOctagon size={20} />
+                </div>
+
+                <div
+                  className={`icon-btn action-btn ${selectedAction === "download" ? "selected" : ""}`}
+                  onClick={() => setSelectedAction("download")}
+                  data-label="Download"
+                >
+                  <Download size={20} />
+                </div>
+              </div>
+
+              {/* Text input */}
+              <input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Type your finance question..."
+                disabled={isStreaming}
+              />
+
+              {/* Bottom icons + send */}
+              <div className="bottom-row">
+                <div className="utilities">
+                  <div className="icon-btn" data-label="Web Search">
+                    <Search size={20} />
+                  </div>
+                  <div className="icon-btn" data-label="Attach File">
+                    <Paperclip size={20} />
+                  </div>
+                </div>
+
+                <button className="send-btn" onClick={sendMessage}>
+                  Send
+                </button>
+              </div>
+            </div>
+          </div>
+
       </main>
     </div>
   )

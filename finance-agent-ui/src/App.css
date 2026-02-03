@@ -88,6 +88,8 @@ body {
   border-top: 1px solid #e5e7eb;
   display: flex;
   gap: 10px;
+  background: transparent !important;
+  border: none !important;
 }
 
 .chat-input input {
@@ -153,4 +155,181 @@ body {
   font-size: 12px;
   color: #475569;
   font-style: italic;
+}
+
+/* New input box layout */
+.input-box {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-box input {
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+/* Action buttons row */
+.input-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: #f8fafc;
+  cursor: pointer;
+}
+
+.action-btn.warning {
+  background: #fff7ed;
+  border-color: #f59e0b;
+}
+
+/* Footer row */
+.input-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input-actions,
+.icon-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Single icon */
+.icon-action {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  color: #374151;
+}
+
+.icon-action:hover {
+  background: #f3f4f6;
+}
+
+/* Hover label (Perplexity-style) */
+.icon-action::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: 45px;
+  background: #111827;
+  color: #fff;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px);
+  transition: all 0.15s ease;
+}
+
+/* Show label on hover */
+.icon-action:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.primary-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  color: #374151;
+  position: relative;
+  transition: background 0.2s, color 0.2s;
+
+}
+
+.icon-btn:hover {
+  background: #f3f4f6;
+}
+
+.icon-btn::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: 45px;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: #111827;
+  color: white;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  opacity: 0;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  pointer-events: none;
+}
+
+.icon-btn:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.icon-btn.selected {
+  background: #2563eb;
+  color: white;
+  border: 1px solid #2563eb;
+}
+
+.bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.utilities {
+  display: flex;
+  gap: 10px;
+}
+
+/* Override send button inside footer */
+.input-footer button:last-child {
+  background: #2563eb;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.send-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
 }
