@@ -2,7 +2,10 @@ import { useEffect, useState, useRef } from "react"
 import ChatBubble from "./components/ChatBubble"
 import type { Message } from "./types"
 import "./App.css"
-import { Search, Paperclip, CalendarCheck, AlertOctagon, Download } from "lucide-react"
+import {
+  Search, Paperclip, CalendarCheck, AlertOctagon, Download, Upload,
+  Trash2
+} from "lucide-react"
 
 function App() {
   const [messages, setMessages] = useState<Message[]>([])
@@ -118,6 +121,7 @@ function App() {
         {/* Input */}
         <div className="chat-input">
           <div className="input-box">
+            {/* Main Input Field */}
             <input
               value={input}
               onChange={e => setInput(e.target.value)}
@@ -126,61 +130,88 @@ function App() {
               onKeyDown={e => e.key === "Enter" && sendMessage()}
             />
 
-            {/* Action buttons */}
-            <div className="primary-actions">
-              <div
-                className={`icon-btn ${selectedAction === "reminder" ? "selected" : ""}`}
-                onClick={() => setSelectedAction("reminder")}
-                data-label="Send Reminder"
-              >
-                <CalendarCheck size={18} />
+            {/* Footer with Action Grid and Send Section */}
+            <div className="input-footer">
+              {/* LEFT: Action Buttons Grid (3 buttons in a grid) */}
+              <div className="actions-grid">
+                {/* Reminder Button */}
+                <button
+                  className={`grid-action-btn ${selectedAction === "reminder" ? "selected" : ""}`}
+                  onClick={() => setSelectedAction(selectedAction === "reminder" ? null : "reminder")}
+                  data-label="Send Reminder"
+                  type="button"
+                >
+                  <CalendarCheck size={18} />
+                </button>
+
+                {/* Escalate Button */}
+                <button
+                  className={`grid-action-btn ${selectedAction === "escalate" ? "selected" : ""}`}
+                  onClick={() => setSelectedAction(selectedAction === "escalate" ? null : "escalate")}
+                  data-label="Escalate"
+                  type="button"
+                  style={{
+                    backgroundColor: selectedAction === "reminder" ? '#2563eb' : '#f9fafb',
+                    border: `1px solid ${selectedAction === "reminder" ? '#2563eb' : '#e5e7eb'}`,
+                    color: selectedAction === "reminder" ? 'white' : '#374151'
+                  }}
+                >
+                  <AlertOctagon size={18} />
+                </button>
+
+                {/* Download Button */}
+                <button
+                  className={`grid-action-btn ${selectedAction === "download" ? "selected" : ""}`}
+                  onClick={() => setSelectedAction(selectedAction === "download" ? null : "download")}
+                  data-label="Download Report"
+                  type="button"
+                >
+                  <Download size={18} />
+                </button>
               </div>
 
-<<<<<<< HEAD
-              {/* Text input */}
-              <input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                disabled={isStreaming}
-              />
-=======
-              <div
-                className={`icon-btn ${selectedAction === "escalate" ? "selected" : ""}`}
-                onClick={() => setSelectedAction("escalate")}
-                data-label="Escalate"
-              >
-                <AlertOctagon size={18} />
-              </div>
->>>>>>> 054481b69ae5eb7291b7a4df99e92c7c4606fa3a
+              {/* RIGHT: Send Section with Utility Buttons */}
+              <div className="send-section">
+                {/* Utility Buttons (2 buttons beside Send) */}
+                <div className="utility-buttons">
+                  {/* Upload Button */}
+                  <button
+                    className="utility-btn"
+                    data-label="Upload File"
+                    onClick={() => console.log("Upload clicked")}
+                    type="button"
+                  >
+                    <Upload size={18} />
+                  </button>
 
-              <div
-                className={`icon-btn ${selectedAction === "download" ? "selected" : ""}`}
-                onClick={() => setSelectedAction("download")}
-                data-label="Download"
-              >
-                <Download size={18} />
+                  {/* Clear Button */}
+                  <button
+                    className="utility-btn"
+                    data-label="Clear Chat"
+                    onClick={() => {
+                      setMessages([]);
+                      setInput("");
+                    }}
+                    type="button"
+                  >
+                    <Trash2 size={18} />
+                  </button>
+                </div>
+
+                {/* Send Button */}
+                <button
+                  className="send-btn"
+                  onClick={() => sendMessage()}
+                  disabled={isStreaming || !input.trim()}
+                  type="button"
+                >
+                  Send
+                </button>
               </div>
             </div>
-<<<<<<< HEAD
-=======
-
-            <div className="bottom-row">
-              <div className="utilities">
-                <div className="icon-btn" data-label="Web Search">
-                  <Search size={18} />
-                </div>
-                <div className="icon-btn" data-label="Attach File">
-                  <Paperclip size={18} />
-                </div>
-              </div>
-
-              <button className="send-btn" onClick={() => sendMessage()}>
-                Send
-              </button>
-            </div>
->>>>>>> 054481b69ae5eb7291b7a4df99e92c7c4606fa3a
           </div>
         </div>
+
       </main>
     </div>
   )
