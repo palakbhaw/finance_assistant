@@ -153,7 +153,6 @@ function App() {
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Type your finance question..."
                 disabled={isStreaming}
               />
 
@@ -174,7 +173,7 @@ function App() {
               </div>
             </div>
           </div>
-
+        </div>
       </main>
     </div>
   )
