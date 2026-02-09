@@ -77,12 +77,10 @@ STRICT RULES
 Finance Data Sources:
 {json.dumps(finance_data2, indent=2)}
 
-    
-
 
     """
     response = client.chat.completions.create(
-        model = "gpt-5-nano",
+        model = "gpt-4.1-nano",
         messages=[
             {
                 "role": "system", "content": System_message
@@ -91,6 +89,7 @@ Finance Data Sources:
                 "role": "user", "content": prompt
             }
         ],
+        max_tokens=2000,
     )
     answer = response.choices[0].message.content
     print(answer)
